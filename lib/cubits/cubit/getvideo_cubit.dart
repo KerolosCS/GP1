@@ -10,7 +10,7 @@ part 'getvideo_state.dart';
 
 class GetvideoCubit extends Cubit<GetvideoState> {
   GetvideoCubit() : super(GetvideoFail());
-String word = '';
+  String word = '';
   VideoPlayerController? controller;
   final ImagePicker picker = ImagePicker();
   XFile? file;
@@ -80,17 +80,20 @@ String word = '';
 
   postData(path, name) {
     emit(PredictLoading());
-    
-    api.sendVidioToNgrok(path, name).then((value) {
-      word = value;
-      print('FFUUFFUFFUFUFUFUFUFUFUFUFFU');
-      print('KERO FROM POST DATA :: $word');
-      emit(PredictSuccess(word));
-      return word;
-    }).catchError((e) {
-      emit(PredictError(e.toString()));
-      return word;
+    Future.delayed(const Duration(seconds: 7), () {
+
+      api.sendVidioToNgrok(path, name).then((value) {
+        word = value;
+        print('FFUUFFUFFUFUFUFUFUFUFUFUFFU');
+        print('KERO FROM POST DATA :: $word');
+        emit(PredictSuccess(word));
+        return word;
+      }).catchError((e) {
+        emit(PredictError(e.toString()));
+        return word;
+      });
+      
     });
-    
+   
   }
 }

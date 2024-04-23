@@ -28,7 +28,7 @@ class ApiService {
       return response.data.toString();
     } catch (e) {
       print("FADY_EXCEPTION :: ${e.toString()}");
-      return 'ERROR OCCURED IN FUNCTION SENDVID';
+      return 'GP ERROR';
     }
   }
 }
